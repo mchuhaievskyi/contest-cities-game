@@ -15,7 +15,7 @@ public class SolutionValidator
         timeoutHandler = new Thread(() -> {
             try
             {
-                long timeoutLimit = TimeUnit.SECONDS.toMillis(2);
+                long timeoutLimit = TimeUnit.MINUTES.toMillis(2);
                 System.out.println("You have only: " + timeoutLimit + "ms");
                 Thread.sleep(timeoutLimit);
                 System.out.println("The timeout is reached, your solution doesn't fit time limit requirements");
