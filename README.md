@@ -1,5 +1,11 @@
 # contest-cities-game
 
+Current high score table:
+
+# | Score | Name | Solution link
+--- | --- | --- | ---
+1 | 12 | @freudzone | https://github.com/mchug/contest-cities-game/pull/3 
+
 Implement the method *com.itkpi.java.contest.cities.solution*.**Solver#solveCitiesGame**
 
 ```java
