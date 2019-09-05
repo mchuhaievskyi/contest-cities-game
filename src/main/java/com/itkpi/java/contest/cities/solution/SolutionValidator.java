@@ -67,7 +67,7 @@ public class SolutionValidator
 
         final Iterator<String> solutionIterator = orderedCitiesList.iterator();
 
-        String prevCity = orderedCitiesList.iterator().next().toLowerCase();
+        String prevCity = solutionIterator.next().toLowerCase();
         String nextCity;
         while (solutionIterator.hasNext())
         {
