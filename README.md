@@ -18,6 +18,11 @@ Implement the method *com.itkpi.java.contest.cities.solution*.**Solver#solveCiti
      * <br>
      *
      * <b>Example:</b> London, Naga, Aurora, Aswan
+     *
+     * <br><br>
+     *
+     * <b>Additional requirements:</b>
+     * Time limit is 2 minutes
      */
     public List<String> solveCitiesGame(List<String> allCitiesList)
     {
