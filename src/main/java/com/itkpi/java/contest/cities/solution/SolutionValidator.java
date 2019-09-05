@@ -4,9 +4,36 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class SolutionValidator
 {
+    private static Thread timeoutHandler;
+
+    public static void initTimeout()
+    {
+        timeoutHandler = new Thread(() -> {
+            try
+            {
+                long timeoutLimit = TimeUnit.SECONDS.toMillis(2);
+                System.out.println("You have only: " + timeoutLimit + "ms");
+                Thread.sleep(timeoutLimit);
+                System.out.println("The timeout is reached, your solution doesn't fit time limit requirements");
+                System.exit(1);
+            }
+            catch (InterruptedException e)
+            {
+                System.out.println("Your solution fits time limit requirements");
+            }
+        });
+        timeoutHandler.start();
+    }
+
+    public static void stopTimeout()
+    {
+        timeoutHandler.interrupt();
+    }
+
     /**
      * For this task, the quality metric of the result is the length sum of all cities names.
      */

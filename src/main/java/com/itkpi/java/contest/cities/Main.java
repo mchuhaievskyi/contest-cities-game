@@ -12,7 +12,11 @@ public class Main
     {
         final List<String> inputCitiesList = IOUtils.readCitiesList();
 
+        SolutionValidator.initTimeout();
+
         final List<String> solution = new Solver().solveCitiesGame(inputCitiesList);
+
+        SolutionValidator.stopTimeout();
 
         if (SolutionValidator.isSolutionValid(inputCitiesList, solution))
         {

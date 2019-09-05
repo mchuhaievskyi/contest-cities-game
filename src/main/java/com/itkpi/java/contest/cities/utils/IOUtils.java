@@ -1,6 +1,7 @@
 package com.itkpi.java.contest.cities.utils;
 
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,14 +15,17 @@ import com.itkpi.java.contest.cities.Main;
 public class IOUtils
 {
     private final static String INPUT_CITIES_LIST_FILE_NAME = "input-cities-list.txt";
-    private final static String INPUT_CITIES_LIST_FILE_HASH = "3K1Z+/xUuF1dzjNR/B8tV9CC7uhaAmbIVjCFE/1S2L8=";
+    private final static String INPUT_CITIES_LIST_FILE_HASH = "lwBDHlgmWG5ngTuN3Mi6t4P7JD0ML1+85ncZKFe1pd0=";
 
     public static List<String> readCitiesList() throws Exception
     {
         final URI inputFileUri = Main.class.getClassLoader().getResource(INPUT_CITIES_LIST_FILE_NAME).toURI();
         final Path inputFilePath = Paths.get(inputFileUri);
 
-        final byte[] digest = MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(inputFilePath));
+        final List<String> allCitiesList = Files.readAllLines(inputFilePath);
+
+        byte[] citiesBytes = String.join("", allCitiesList).getBytes(StandardCharsets.UTF_8);
+        final byte[] digest = MessageDigest.getInstance("SHA-256").digest(citiesBytes);
         final String actualDigestBase64 = Base64.getEncoder().encodeToString(digest);
 
         if (!INPUT_CITIES_LIST_FILE_HASH.equals(actualDigestBase64))
@@ -29,6 +33,6 @@ public class IOUtils
             throw new IllegalArgumentException("The sha256 digest of the input file is not valid");
         }
 
-        return Collections.unmodifiableList(Files.readAllLines(inputFilePath));
+        return Collections.unmodifiableList(allCitiesList);
     }
 }
