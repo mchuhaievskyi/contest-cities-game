@@ -14,7 +14,18 @@ public class Main
 
         SolutionValidator.initTimeout();
 
-        final List<String> solution = new Solver().solveCitiesGame(inputCitiesList);
+        final List<String> solution;
+        try
+        {
+            solution = new Solver().solveCitiesGame(inputCitiesList);
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Your solution doesn't work =(");
+            ex.printStackTrace();
+            System.exit(1);
+            return;
+        }
 
         SolutionValidator.stopTimeout();
 
