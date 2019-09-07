@@ -4,7 +4,10 @@ Current high score table:
 
 Place | Score | Name | Solution link
 --- | --- | --- | ---
-1 | 12 | @freudzone | https://github.com/mchug/contest-cities-game/pull/3 
+1 | 6976* | @kovez | https://github.com/luxTutamen/cities
+2 | 12 | @freudzone | https://github.com/mchug/contest-cities-game/pull/3 
+
+\* _the actual score = 11976 - 5000 (penalty because the solution wasn't integrated into a provided skeleton)_
 
 Implement the method *com.itkpi.java.contest.cities.solution*.**Solver#solveCitiesGame**
 
