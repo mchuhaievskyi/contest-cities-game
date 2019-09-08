@@ -1,6 +1,6 @@
 # contest-cities-game
 
-Current high score table:
+#### Current high score table:
 
 Place | Score | Name | Solution link
 --- | --- | --- | ---
@@ -14,6 +14,15 @@ Place | Score | Name | Solution link
 
 \*\* _the actual score is higher, but since solution behaviour is not idempotent, I have chosen the best score (16600) and added extra penalty -100_
 
+#### For external solution (solutions written not in Java) 
+The requirements are next:
+* Be runnable at windows (sorry, I don't have linux env right now)
+* Accepts 2 command line params: input file path and output file path
+* Writes the solution* to the file which path was passed as a second argument
+ 
+\* cities chain in the same format as in input file 
+
+#### For Java solutions
 Implement the method *com.itkpi.java.contest.cities.solution*.**Solver#solveCitiesGame**
 
 ```java
