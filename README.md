@@ -4,10 +4,14 @@ Current high score table:
 
 Place | Score | Name | Solution link
 --- | --- | --- | ---
-1 | 6976* | @kovez | https://github.com/luxTutamen/cities
-2 | 12 | @freudzone | https://github.com/mchug/contest-cities-game/pull/3 
+1 | 16500** | @black220sun | https://gitlab.com/black220sun/contest-cities-game/tree/Attempt-1
+2 | 13530 | @tsvietOK | https://github.com/tsvietOK/contest-cities-game
+3 | 6976* | @kovez | https://github.com/luxTutamen/cities
+4 | 12 | @freudzone | https://github.com/mchug/contest-cities-game/pull/3 
 
 \* _the actual score = 11976 - 5000 (penalty because the solution wasn't integrated into a provided skeleton)_
+
+\*\* _the actual score is higher, but since solution behaviour is not idempotent, I have chosen the best score (16600) and added extra penalty -100_
 
 Implement the method *com.itkpi.java.contest.cities.solution*.**Solver#solveCitiesGame**
 
