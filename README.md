@@ -4,15 +4,14 @@
 
 Place | Score | Name | Solution link
 --- | --- | --- | ---
-1 | 16500** | @black220sun | https://gitlab.com/black220sun/contest-cities-game/tree/Attempt-1
-2 | 14800** | @dantistnfs | https://github.com/Dantistnfs/contest-cities-game (Rust)
-3 | 13847 | @tsvietOK | https://github.com/tsvietOK/contest-cities-game
-4 | 6976* | @kovez | https://github.com/luxTutamen/cities
-5 | 12 | @freudzone | https://github.com/mchug/contest-cities-game/pull/3 
+1 | 16715 | @black220sun | https://gitlab.com/black220sun/contest-cities-game/tree/Attempt-2
+2 | 15984 | @tsvietOK | https://github.com/tsvietOK/contest-cities-game
+3 | 15900 | @freudzone | https://github.com/freudzone/contest-cities-game
+4 | 14800* | @dantistnfs | https://github.com/Dantistnfs/contest-cities-game (Rust)
+5 | 11941 | @kovez | https://github.com/luxTutamen/cities
 
-\* _the actual score = 11976 - 5000 (penalty because the solution wasn't integrated into a provided skeleton)_
 
-\*\* _the actual score is higher, but since solution behaviour is not idempotent, I have chosen the best score and added extra penalty -100_
+\* _the actual score is higher, but since solution behaviour is not idempotent, I have chosen the best score and added extra penalty -100_
 
 #### For external solution (solutions written not in Java) 
 The requirements are next:
