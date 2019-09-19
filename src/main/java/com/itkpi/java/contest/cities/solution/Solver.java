@@ -30,7 +30,7 @@ public class Solver
     {
         TreeMap<Integer, List<String>> solutionMap = new TreeMap<>(Integer::compareTo);
 
-        for (char c = 'a'; c <= 'z'; c++)
+        for (char c : allCitiesList.stream().map(Solver::getFirstChar).collect(Collectors.toSet()))
         {
             final List<String> solution = buildSolution(String.valueOf(c), allCitiesList);
             solutionMap.put(evaluateSolution(solution), solution);
@@ -47,14 +47,14 @@ public class Solver
 
     private static Integer evaluateSolution(List<String> solutionList)
     {
-        return solutionList.stream().mapToInt(String::length).sum();
+        return solutionList.parallelStream().mapToInt(String::length).sum();
     }
 
     private static List<String> buildSolution(String firstLetter, List<String> availableCities)
     {
         final Map<Character, List<String>> citiesMap = availableCities
                 .stream()
-                .collect(Collectors.groupingBy(s -> s.toLowerCase().charAt(0)));
+                .collect(Collectors.groupingBy(Solver::getFirstChar));
 
         final List<String> solutionList = new LinkedList<>();
 
@@ -111,15 +111,37 @@ public class Solver
         for (String matchedCity : matchedCities)
         {
             char matchedCityLastChar = getLastChar(matchedCity);
-            int matchedCityScore = citiesMap.get(matchedCityLastChar).size();
+            int matchedCityScore;
+
+            if (isSelfLoop(matchedCity))
+            {
+                matchedCityScore = Integer.MAX_VALUE / 2;
+            }
+            else
+            {
+                matchedCityScore = citiesMap.get(matchedCityLastChar).size();
+            }
+
+            matchedCityScore += matchedCity.length();
+
             matchedCitiesMap.put(matchedCityScore, matchedCity);
         }
 
         return matchedCitiesMap.lastEntry().getValue();
     }
 
+    private static boolean isSelfLoop(String cityName)
+    {
+        return getFirstChar(cityName) == getLastChar(cityName);
+    }
+
     private static char getLastChar(String city)
     {
-        return city.charAt(city.length() - 1);
+        return Character.toLowerCase(city.charAt(city.length() - 1));
+    }
+
+    private static char getFirstChar(String city)
+    {
+        return Character.toLowerCase(city.charAt(0));
     }
 }
