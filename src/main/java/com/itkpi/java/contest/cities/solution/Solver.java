@@ -1,7 +1,7 @@
 package com.itkpi.java.contest.cities.solution;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Solver
 {
@@ -28,7 +28,120 @@ public class Solver
      */
     public List<String> solveCitiesGame(List<String> allCitiesList)
     {
-        // TODO: implement this
-        return Collections.emptyList();
+        TreeMap<Integer, List<String>> solutionMap = new TreeMap<>(Integer::compareTo);
+
+        for (char c : allCitiesList.stream().map(Solver::getFirstChar).collect(Collectors.toSet()))
+        {
+            final List<String> solution = buildSolution(String.valueOf(c), allCitiesList);
+            solutionMap.put(evaluateSolution(solution), solution);
+        }
+
+        // System.out.println("solutions = " + solutionMap.keySet());
+
+        final List<String> bestSolution = solutionMap.lastEntry().getValue();
+
+        // System.out.println("best solution = " + evaluateSolution(bestSolution));
+
+        return bestSolution;
+    }
+
+    private static Integer evaluateSolution(List<String> solutionList)
+    {
+        return solutionList.parallelStream().mapToInt(String::length).sum();
+    }
+
+    private static List<String> buildSolution(String firstLetter, List<String> availableCities)
+    {
+        final Map<Character, List<String>> citiesMap = availableCities
+                .stream()
+                .collect(Collectors.groupingBy(Solver::getFirstChar));
+
+        final List<String> solutionList = new LinkedList<>();
+
+        String currentCity = findNextCity(firstLetter, citiesMap);
+        solutionList.add(currentCity);
+
+        String nextCity;
+        while (true)
+        {
+            nextCity = findNextCity(currentCity, citiesMap);
+
+            if (nextCity == null)
+            {
+                break;
+            }
+
+            solutionList.add(nextCity);
+            currentCity = nextCity;
+        }
+
+        return solutionList;
+    }
+
+    private static String findNextCity(String currentCity, Map<Character, List<String>> citiesMap)
+    {
+        // System.out.println("currentCity = " + currentCity);
+
+        final char lastChar = getLastChar(currentCity);
+
+        // System.out.println("lastChar = " + lastChar);
+
+        final List<String> matchedCities = citiesMap.get(lastChar);
+
+        // System.out.println("matchedCities = " + matchedCities);
+
+        if (matchedCities.isEmpty())
+        {
+            return null;
+        }
+
+        final String nextCity = takeOptimalCity(matchedCities, citiesMap);
+
+        // System.out.println("nextCity = " + nextCity);
+
+        matchedCities.remove(nextCity);
+
+        return nextCity;
+    }
+
+    private static String takeOptimalCity(List<String> matchedCities, Map<Character, List<String>> citiesMap)
+    {
+        TreeMap<Integer, String> matchedCitiesMap = new TreeMap<>(Integer::compareTo);
+
+        for (String matchedCity : matchedCities)
+        {
+            char matchedCityLastChar = getLastChar(matchedCity);
+            int matchedCityScore;
+
+            if (isSelfLoop(matchedCity))
+            {
+                matchedCityScore = Integer.MAX_VALUE / 2;
+            }
+            else
+            {
+                matchedCityScore = citiesMap.get(matchedCityLastChar).size();
+            }
+
+            matchedCityScore += matchedCity.length();
+
+            matchedCitiesMap.put(matchedCityScore, matchedCity);
+        }
+
+        return matchedCitiesMap.lastEntry().getValue();
+    }
+
+    private static boolean isSelfLoop(String cityName)
+    {
+        return getFirstChar(cityName) == getLastChar(cityName);
+    }
+
+    private static char getLastChar(String city)
+    {
+        return Character.toLowerCase(city.charAt(city.length() - 1));
+    }
+
+    private static char getFirstChar(String city)
+    {
+        return Character.toLowerCase(city.charAt(0));
     }
 }
